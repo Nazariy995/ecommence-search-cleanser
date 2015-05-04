@@ -1,3 +1,8 @@
+'''
+This is used if you want to convert a list of a bunch of things to a json file
+Useful if you need a list to compare against
+'''
+
 import json
 fulllist = []
 f= open("keywords.txt","r")
