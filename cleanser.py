@@ -2,7 +2,16 @@ import json
 import nltk
 import re
 from nltk import Tree
-
+'''
+Directions:
+from cleanser import cleanser
+trial = cleanser("slim jeans from zappos for around 50 dollars")
+trial.start_parse()
+Get the data:
+trial.prices
+trial.brands
+trial.merchants
+'''
 class cleanser():
     def __init__(self, search_string):
         self.prices = []
@@ -21,6 +30,7 @@ class cleanser():
         self.search = self.tree2dict(self.tokenized_string)
         self.get_all_names()
 
+    #get all the brands and merchants from an external file
     def get_all_names(self):
         with open("brands.json","r") as infile:
             self.all_brands = json.load(infile)
@@ -40,12 +50,15 @@ class cleanser():
         cp = nltk.RegexpParser(self.grammar,loop=2)
         return cp.parse(tokenized_string)
 
+    #convert tree to a dictionary
     def tree2dict(self,tree):
         return {tree.label(): [self.tree2dict(t)  if isinstance(t, Tree) else t for t in tree]}
 
+    #called when parsing the string
     def start_parse(self):
         self.parse(self.search)
 
+    #go through each tuple and save the appropriate data
     def parse(self,search):
         for key, sentence in search.iteritems():
             for word in sentence:
@@ -66,6 +79,7 @@ class cleanser():
                 elif isinstance(word,dict):
                     self.parse(word)
 
+    #get the price from tuple
     def price_match(self,word):
         if word[1] == "CD":
             self.temp_price = word[0]
@@ -73,6 +87,7 @@ class cleanser():
         else:
             return False
 
+    #get the merchant from tuple
     def merchant_match(self,word):
         if word[0] in self.all_merchants:
             self.temp_merchant = word[0]
@@ -80,6 +95,7 @@ class cleanser():
         else:
             return False
 
+    #get the brand from tuple
     def brand_match(self,word):
         if word[0] in self.all_brands:
             self.temp_brand = word[0]
