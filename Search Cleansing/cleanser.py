@@ -60,8 +60,10 @@ class cleanser():
 
     #go through each tuple and save the appropriate data
     def parse(self,search):
+        print search
         for key, sentence in search.iteritems():
             for word in sentence:
+                print word
                 if isinstance(word,tuple):
                     part_of_speech = re.compile('[JJ|NN|CD]+')
                     if part_of_speech.match(word[1]):
@@ -89,7 +91,7 @@ class cleanser():
 
     #get the merchant from tuple
     def merchant_match(self,word):
-        if word[0] in self.all_merchants:
+        if word[0].lower() in self.all_merchants:
             self.temp_merchant = word[0]
             return True
         else:
@@ -97,7 +99,7 @@ class cleanser():
 
     #get the brand from tuple
     def brand_match(self,word):
-        if word[0] in self.all_brands:
+        if word[0].lower() in self.all_brands:
             self.temp_brand = word[0]
             return True
         else:
