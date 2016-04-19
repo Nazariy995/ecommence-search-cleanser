@@ -1,0 +1,10 @@
+Ecommerce Search Cleanser
+
+Using Python NLTK we can extract the following data from a sentence:
+- Brands
+- Merchants
+- Price
+- Description of the product such as color and more 
+
+So if a person types in "I want a blue dress for 50 dollars", the cleanser will pick out the needed information such as blue, dress, and 50.
+With that, it will relate the content to correct assignments for search purposes.
