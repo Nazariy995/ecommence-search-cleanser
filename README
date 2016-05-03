@@ -1,10 +1,36 @@
-Ecommerce Search Cleanser
+E-commerce Search Cleanser
+=========================
 
 Using Python NLTK we can extract the following data from a sentence:
-- Brands
-- Merchants
-- Price
-- Description of the product such as color and more 
 
-So if a person types in "I want a blue dress for 50 dollars", the cleanser will pick out the needed information such as blue, dress, and 50.
-With that, it will relate the content to correct assignments for search purposes.
+ - Brands
+ - Merchants
+ - Price
+ - General Search Query
+
+Run
+---
+
+    >>> from cleanser import cleanser
+	>>> trial = cleanser("slim jeans from zappos for around 50 dollars")
+	>>> trial.start_parse()
+	{u'S': [{u'NP': [('slim', 'NN'), ('jeans', 'NNS')]}, {u'PP': [('from', 'IN'), ('zappos', 'NNS')]}, {u'PP': [('for', 'IN'), ('around', 'IN'), ('50', 'CD')]}]}
+	{u'NP': [('slim', 'NN'), ('jeans', 'NNS')]}
+	{u'NP': [('slim', 'NN'), ('jeans', 'NNS')]}
+	('slim', 'NN')
+	('jeans', 'NNS')
+	{u'PP': [('from', 'IN'), ('zappos', 'NNS')]}
+	{u'PP': [('from', 'IN'), ('zappos', 'NNS')]}
+	('from', 'IN')
+	('zappos', 'NNS')
+	{u'PP': [('for', 'IN'), ('around', 'IN'), ('50', 'CD')]}
+	{u'PP': [('for', 'IN'), ('around', 'IN'), ('50', 'CD')]}
+	('for', 'IN')
+	('around', 'IN')
+	('50', 'CD')
+	>>> trial.prices
+	['50']
+	>>> trial.merchants
+	['zappos']
+	>>> trial.search_query
+	' slim jeans'
