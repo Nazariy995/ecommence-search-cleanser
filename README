@@ -10,8 +10,7 @@ Using Python NLTK we can extract the following data from a sentence:
 
 Run
 ---
-
-    >>> from cleanser import cleanser
+    	>>> from cleanser import cleanser
 	>>> trial = cleanser("slim jeans from zappos for around 50 dollars")
 	>>> trial.start_parse()
 	{u'S': [{u'NP': [('slim', 'NN'), ('jeans', 'NNS')]}, {u'PP': [('from', 'IN'), ('zappos', 'NNS')]}, {u'PP': [('for', 'IN'), ('around', 'IN'), ('50', 'CD')]}]}
